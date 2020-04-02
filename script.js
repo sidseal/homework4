@@ -4,8 +4,8 @@ var $timer = document.getElementById('Timer');
 var $question = document.getElementById('Question');
 var $answer = document.getElementById('Answer');
 var $startbtn = document.getElementById('Start');
-
 let intervalRef;
+
 $startbtn.addEventListener('click', function(event){
     event.preventDefault()
     displayQuestion()
@@ -17,34 +17,59 @@ $startbtn.addEventListener('click', function(event){
 
 var questions= [
     {
-    question: "billy?",
-    answers: ["al","bob"],
-    rightAnswer: "al"
+    question: "What does HTML stand for?",
+    answers: ["Home Tool Makeup Language","Hyper Text Markup Language","Human Test Madeup Language"],
+    rightAnswer: "Hyper Text Markup Language"
     },
     {
-    question: "jan?",
-    answers: ["a","b"],
-    rightAnswer: "a"
+    question: "Which HTML attribute specifies an alternate text for your image, if the image cannot be displayed?",
+    answers: ["image","img","src","alt"],
+    rightAnswer: "alt"
     },
     {
-    question: "gibralter?",
-    answers: ["a","b"],
-    rightAnswer: "a"
+    question: "Which character is used to indicate an end tag?",
+    answers: ["^",".","/",")"],
+    rightAnswer: "/"
     },
     {
-    question: "nonsense?",
-    answers: ["a","b"],
-    rightAnswer: "a"
+    question: "What does CSS stand for?",
+    answers: ["Cascading Style Sheets","Concise Style Spread","Constant Style Surface"],
+    rightAnswer: "Cascading Style Sheets"
     },
     {
-    question: "lorem?",
-    answers: ["a","b"],
-    rightAnswer: "a"
+    question: "Which HTML attribute is used to define inline styles?",
+    answers: ["font","class","sheets","style"],
+    rightAnswer: "style"
+    },
+    {
+    question: "What is the default value of the position property?",
+    answers: ["Fixed","Relative","Static","Absolute"],
+    rightAnswer: "Static"
+    }, 
+    {
+    question: "The external Javascript file must contain the script tag",
+    answers: ["True","False"],
+    rightAnswer: "False"
+    },
+    {
+    question: "Which event occurs when the user clicks on an HTML element?",
+    answers: ["onmouseclick","onclick","onchange","onmouse"],
+    rightAnswer: "onclick"
+    },
+    {
+    question: "How do you declare a Javascript variable?",
+    answers: ["variable carName","var carName","v newVariable"],
+    rightAnswer: "var carName"
+    },
+    {
+    question: "Is Javascript case-sensitive?",
+    answers: ["Yes","No"],
+    rightAnswer: "Yes"
     },
     ]
 
 var questionNow=0 //refer to this in displayQuestion()
-var time = 75
+var time = 150
 
 function displayQuestion(){
 let questionObject = questions[questionNow]
