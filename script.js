@@ -27,12 +27,12 @@ function endGame(){
         time,
     }
 
-    console.log(resultOb)
+   
     var scoresSoFar=localStorage.getItem('highscores')
 
     if(!scoresSoFar){
     let stringOb= JSON.stringify([resultOb])
-    console.log("IN HERE", stringOb)
+    
     localStorage.setItem('highscores', stringOb)
     }else{
     let scoresArray= JSON.parse(scoresSoFar)  
@@ -46,14 +46,10 @@ function endGame(){
 function displayScores(){
     $playersList.innerHTML=""
 let basket=localStorage.getItem('highscores')
-console.log(typeof basket, basket)
 var parsed= JSON.parse(basket)
-console.log( parsed)
+
 parsed.sort(function(a,b){return b.time-a.time})
-// // sort by value
-// items.sort(function (a, b) {
-//     return a.value - b.value;
-//   });
+
 parsed.forEach(function(score){
     let $newP = document.createElement('p')
     $newP.innerText= `${score.initials} : ${score.time}`
@@ -148,10 +144,7 @@ $(document).on('click', ".clickable", function(){
     //happens no matter right or wrong
     //displayTime()
     if(questionNow>=questions.length-1){
-        // const clicakable= document.querySelectorAll(".clickable")
-        // clicakable.forEach(function(elem){
-            //     elem.removeAttribute("class")
-            // })
+        
             endGame()
         }else{
         questionNow++
@@ -163,7 +156,7 @@ $(document).on('click', ".clickable", function(){
 function displayTime(){
     if(time<=0){
         clearInterval(intervalRef)
-        console.log("GAME OVER")
+       
         endGame()
     }
     $timer.innerText=time
