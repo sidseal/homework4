@@ -5,6 +5,74 @@ var $question = document.getElementById('Question');
 var $answer = document.getElementById('Answer');
 var $startbtn = document.getElementById('Start');
 let intervalRef;
+var $hiddenDiv = document.getElementById('highscorediv');
+var $playerName = document.getElementById('playername');
+var $scoreDisplay = document.getElementById('scoredisplay');
+var $addPlayer = document.getElementById('add-player');
+var $playersList = document.getElementById('playerslist');
+//var $enterName = document.getElementById('enterName');
+
+
+
+
+// var input = document.createElement("input");
+
+// input.setAttribute("type", "visible");
+
+// input.setAttribute("name", "name_you_want");
+
+// //append to form element that you want .
+// document.body.appendChild(input);
+// $playerName.style.display='none';
+$hiddenDiv.style.display='none'
+//$enterName.style.display='none'
+
+function endGame(){
+    clearInterval(intervalRef)
+    //$enterName.style.display='block'
+    //put the score on display
+    //add a listener to the name entry
+    //$hiddenDiv.style.display='block'
+    var initials=prompt('Enter Name: ')
+    var resultOb={
+        initials,
+        time,
+    }
+
+    console.log(resultOb)
+    var scoresSoFar=localStorage.getItem('highscores')
+
+    if(!scoresSoFar){
+    let stringOb= JSON.stringify([resultOb])
+    console.log("IN HERE", stringOb)
+    localStorage.setItem('highscores', stringOb)
+    }else{
+    let scoresArray= JSON.parse(scoresSoFar)  
+    scoresArray.push(resultOb)
+    localStorage.setItem('highscores', JSON.stringify(scoresArray))
+    }
+    //unhide div?
+    displayScores()
+}
+
+function displayScores(){
+    $playersList.innerHTML=""
+let basket=localStorage.getItem('highscores')
+console.log(typeof basket, basket)
+var parsed= JSON.parse(basket)
+console.log( parsed)
+parsed.sort(function(a,b){return b.time-a.time})
+// // sort by value
+// items.sort(function (a, b) {
+//     return a.value - b.value;
+//   });
+parsed.forEach(function(score){
+    let $newP = document.createElement('p')
+    $newP.innerText= `${score.initials} : ${score.time}`
+    $playersList.append($newP)
+})
+
+}
 
 $startbtn.addEventListener('click', function(event){
     event.preventDefault()
@@ -68,7 +136,7 @@ var questions= [
     },
     ]
 
-var questionNow=0 //refer to this in displayQuestion()
+var questionNow=0 
 var time = 150
 
 function displayQuestion(){
@@ -93,8 +161,16 @@ $(document).on('click', ".clickable", function(){
     }
     //happens no matter right or wrong
     //displayTime()
-    questionNow++
-    displayQuestion()
+    if(questionNow>=questions.length-1){
+        // const clicakable= document.querySelectorAll(".clickable")
+        // clicakable.forEach(function(elem){
+            //     elem.removeAttribute("class")
+            // })
+            endGame()
+        }else{
+        questionNow++
+        displayQuestion()
+    }
 })
 
 
@@ -102,8 +178,15 @@ function displayTime(){
     if(time<=0){
         clearInterval(intervalRef)
         console.log("GAME OVER")
+        endGame()
     }
     $timer.innerText=time
     time-=1
 }
 //gameOver()
+
+$highScore.addEventListener('click', function(event){
+    $hiddenDiv.style.display="block"
+    displayScores()
+    
+})
