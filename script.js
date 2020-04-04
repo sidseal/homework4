@@ -12,20 +12,8 @@ var $addPlayer = document.getElementById('add-player');
 var $playersList = document.getElementById('playerslist');
 //var $enterName = document.getElementById('enterName');
 
-
-
-
-// var input = document.createElement("input");
-
-// input.setAttribute("type", "visible");
-
-// input.setAttribute("name", "name_you_want");
-
-// //append to form element that you want .
-// document.body.appendChild(input);
-// $playerName.style.display='none';
 $hiddenDiv.style.display='none'
-//$enterName.style.display='none'
+
 
 function endGame(){
     clearInterval(intervalRef)
@@ -80,8 +68,6 @@ $startbtn.addEventListener('click', function(event){
     //displayTime()
     intervalRef=setInterval(displayTime,1000)
 })
-
-
 
 var questions= [
     {
